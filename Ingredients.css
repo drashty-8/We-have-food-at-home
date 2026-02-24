@@ -1,0 +1,94 @@
+/* color palette https://colorhunt.co/palette/84994fffe797fcb53bb45253 */
+
+.grid-item {
+  float: left;
+  width: 80px;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+}
+
+.grid-item--width1 { width: 30%; }
+.grid-item--width2 { width: 60%;}
+
+
+
+
+
+p {
+  color: #B45253;
+  font-family: "Gardein", serif;
+  text-align: center;
+}
+
+.pantry {
+  font-family: "Courier New";
+  color: #2A9D8F;
+  background-color: #84994F;
+  border: medium ridge #B45253;
+  border-radius: 8%;
+  margin: 0% 5%;
+}
+
+.btn-add-item {
+  position: sticky;
+  top: 0;
+  background-color: #FFE797;
+  color: #B45253;
+}
+
+.ing {
+  transform: translate(25%);
+  background-color: #FFE797;
+  color: #B45253;
+  border: small #FCB53B;
+  border-radius: 5px;
+  margin: 2%;
+  font-size: 12px;
+}
+
+.rec {
+  background-color: #FCB53B;
+  color: #B45253;
+  border: small #FCB53B;
+  border-radius: 5px;
+  margin: 2.5%;
+}
+
+
+.recipes {
+  font-family: "Courier New";
+  background-color: #B45253;
+  border: medium ridge #B45253;
+  border-radius: 8%;
+}
+
+body {
+  background-color: #FFE797;
+
+}
+
+div {
+  color: black;
+}
+
+h1, h3 {
+  font-family: "Gardein", serif;
+  text-align: center;
+  color: #FCB53B;
+  text-shadow: 1px 1px 2px black, 0 0 25px #B45253, 0 0 5px #84994F;
+}
+
+img {
+  display: block;
+  max-width: 80%;
+  height: auto;
+  margin: auto;
+  margin-top: 5%;
+  border-radius: 5%;
+}
+
+.rec-input {
+  position: sticky;
+  top: 0;
+}
+
+/* comment */

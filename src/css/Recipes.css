@@ -1,0 +1,18 @@
+.recipe-grid {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  flex-wrap: wrap;
+  overflow: scroll;
+  justify-content: space-around;
+}
+
+.search-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.recipes-error {
+  color: #d32f2f;
+  font-size: 13px;
+}

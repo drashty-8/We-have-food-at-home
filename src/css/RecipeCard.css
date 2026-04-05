@@ -1,0 +1,25 @@
+.recipe-card {
+  border: solid 1px black;
+  border-radius: 24px;
+  padding-bottom: 4px;
+  margin: 4px;
+  width: 350px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-4px);
+}
+
+.recipe-img {
+  border-radius: 24px 24px 0px 0px;
+  margin-bottom: 0.5rem;
+}
+
+.recipe-title {
+  font-size: 1rem;
+  text-align: center;
+}

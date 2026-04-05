@@ -1,0 +1,28 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
+  padding: 1rem 6rem;
+  font-size: 1.4em;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-brand a {
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  padding: 0.5rem;
+  gap: 2rem;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}

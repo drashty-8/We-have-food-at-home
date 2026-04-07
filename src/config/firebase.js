@@ -1,15 +1,17 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCqXpY8z0uPZd6Ci1EBuoB8iHCSzQJ4IbE",
-  authDomain: "wehavefoodathome-9edec.firebaseapp.com",
-  projectId: "wehavefoodathome-9edec",
-  storageBucket: "wehavefoodathome-9edec.firebasestorage.app",
-  messagingSenderId: "998581500871",
-  appId: "1:998581500871:web:2d6054bec3c3011e7b37e2",
-  measurementId: "G-JCZR8300CQ",
+  apiKey: "AIzaSyCKMJ_Arjbt6YBD8j_NYFNrRf0Toul2Tak",
+  authDomain: "we-have-food-at-home-8eeae.firebaseapp.com",
+  projectId: "we-have-food-at-home-8eeae",
+  storageBucket: "we-have-food-at-home-8eeae.firebasestorage.app",
+  messagingSenderId: "950010104423",
+  appId: "1:950010104423:web:afb5aefe560bf49a16e2c2"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);

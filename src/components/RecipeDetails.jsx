@@ -40,7 +40,7 @@ function RecipeDetails({ recipeId, onBack }) {
       }
     };
 
-    loadRecipe();
+    loadRecipe();    
 
     // Prevent old, stale API data from appearing after new data.
     // This return function is called anytime useEffect is called, before
@@ -77,12 +77,38 @@ function RecipeDetails({ recipeId, onBack }) {
     );
   }
 
+  console.log(recipeSteps);
+
   return (
     <div>
       <button onClick={onBack}>Back</button>
       <img src={recipeDetails.image} alt={recipeDetails.title} />
       <h2>{recipeDetails.title}</h2>
+      {`<p>Summary: {recipeDetails.summary}</p>`}
       <p>Servings: {recipeDetails.servings}</p>
+      <p>Total Time: {recipeDetails.readyInMinutes || "Not specified"}</p>
+      <p>Prep Time: {recipeDetails.preparationMinutes || "Not specified"}</p>
+      <p>Cook Time: {recipeDetails.cookingMinutes || "Not specified"}</p>
+
+      <div className="ingredients-list">
+        {recipeDetails.extendedIngredients.map((ingredient) => (
+          <p>{ingredient.name}, {ingredient.amount} {ingredient.unit}</p>
+        ))}
+      </div>
+
+      <div className="recipe-steps">
+        {recipeSteps.map((section, sectionIndex) => (
+          <div className="steps-section">
+            <p>Section: {section.name || "No section name"}</p>
+
+            {section.steps.map((item) => (
+              <p className="steps-instructions">
+                {item.number}. {item.step}
+              </p>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

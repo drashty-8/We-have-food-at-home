@@ -1,26 +1,24 @@
 .primary-content {
   display: flex;
-  flex-direction: column; 
-  padding: 10px;
-  gap: 20px;
-  width: 100%;
+  padding: 16px;
+  gap: 16px;
+  height: calc(100vh - 5rem);
 }
 
-.pantry-pane, .recipes-pane {
-  width: 100%; 
+.pantry-pane {
+  flex: 1;
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
-@media (min-width: 768px) {
-  .primary-content {
-    flex-direction: row; 
-    padding: 40px;
-  }
-
-  .pantry-pane {
-    width: 300px; 
-  }
-
-  .recipes-pane {
-    flex: 1; 
-  }
+.recipes-pane {
+  flex: 3;
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  overflow-y: auto;
 }

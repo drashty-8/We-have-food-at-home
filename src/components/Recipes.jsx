@@ -3,7 +3,7 @@ import "../css/Recipes.css";
 import { useState } from "react";
 import { searchRecipesByIngredients } from "../utils/api";
 
-function Recipes({ chips, onSelectRecipe }) {
+function Recipes({ chips, filters, onSelectRecipe }) {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ function Recipes({ chips, onSelectRecipe }) {
       const ingredientNames = chips.map((chip) => {
         return chip.name
       });
-      const results = await searchRecipesByIngredients(ingredientNames, 12);
+      const results = await searchRecipesByIngredients(ingredientNames, filters, 12);
       setRecipes(results);
       setHasSearched(true);
     } catch (err) {

@@ -7,6 +7,8 @@ import { useState } from "react";
 function Home() {
   const [chips, setChips] = useState([]); // [{ id, name }]
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+  const [filters, setFilters] = useState({
+  });
 
   return (
     <div className="primary-content">
@@ -23,6 +25,7 @@ function Home() {
         ) : (
           <Recipes
             chips={chips}
+            filters={filters}
             onSelectRecipe={setSelectedRecipeId}
           />
         )}

@@ -44,17 +44,27 @@ export async function fetchIngredientSuggestions(query, number = 5) {
  * Search recipes by a list of ingredient names.
  * Returns an array of recipe summary objects.
  */
-export async function searchRecipesByIngredients(ingredientNames, number = 6) {
+export async function searchRecipesByIngredients(ingredientNames, filters, number = 6) {
   // Return empty if pantry is empty.
   if (!ingredientNames.length) return [];
 
   const formatted = ingredientNames.join(",");
 
-  const data = await spoonFetch("/recipes/complexSearch", {
+  const params = {
     includeIngredients: formatted,
     sort: "max-used-ingredients",
     number,
-  });
+  };
+
+  // Handle filtesr.
+  if (filters.cuisine) params.cuisine = filters.cuisine.join(",");
+  if (filters.excludeCuisine) params.excludeCuisine = filters.excludeCuisine;
+  if (filters.diet) params.diet = filters.diet;
+  if (filters.intolerances) params.intolerances = filters.intolerances;
+
+  const data = await spoonFetch("/recipes/complexSearch", params);
+
+  console.log(params);
 
   // Technically not correct, but works.
   // Should probably be return data.results ?? [];

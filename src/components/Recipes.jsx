@@ -35,6 +35,24 @@ function Recipes({ chips, onSelectRecipe }) {
       <div className="recipe-filters">
         <button
           type="button"
+          className="specify-ingredients-button"
+          onClick={``}
+          disabled={loading || !chips.length}
+        >
+          Specify Ingredients
+        </button>
+
+        <button 
+          type="button"
+          className="filter-button"
+          onClick={``}
+          disabled={loading}
+        >
+          Filters
+        </button>
+
+        <button
+          type="button"
           className="search-button"
           onClick={handleSearch}
           disabled={loading || !chips.length}  // prevent clicking the search button

@@ -58,9 +58,9 @@ export async function searchRecipesByIngredients(ingredientNames, filters, numbe
 
   // Handle filtesr.
   if (filters.cuisine) params.cuisine = filters.cuisine.join(",");
-  if (filters.excludeCuisine) params.excludeCuisine = filters.excludeCuisine;
-  if (filters.diet) params.diet = filters.diet;
-  if (filters.intolerances) params.intolerances = filters.intolerances;
+  if (filters.excludeCuisine) params.excludeCuisine = filters.excludeCuisine.join(",");
+  if (filters.diet) params.diet = filters.diet.join(",");
+  if (filters.intolerances) params.intolerances = filters.intolerances.join(",");
 
   const data = await spoonFetch("/recipes/complexSearch", params);
 

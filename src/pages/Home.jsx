@@ -8,6 +8,10 @@ function Home() {
   const [chips, setChips] = useState([]); // [{ id, name }]
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
   const [filters, setFilters] = useState({
+    cuisine: [],
+    excludeCuisine: [],
+    diet: [],
+    intolerances: [],
   });
 
   return (

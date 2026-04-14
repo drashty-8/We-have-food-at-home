@@ -3,11 +3,31 @@ import "../css/Recipes.css";
 import { useState } from "react";
 import { searchRecipesByIngredients } from "../utils/api";
 
-function Recipes({ chips, filters, onSelectRecipe }) {
+function Recipes({ chips, filters, setFilters, onSelectRecipe }) {
   const [recipes, setRecipes] = useState([]);
+  const [showFilters, setShowFilters] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false); // differentiates whether a blank screen is no recipes, or not yet searched
+
+  const cuisines = [
+    "african", "asian", "american", "british", "cajun", "caribbean", "chinese",
+    "eastern european", "european", "french", "german", "greek", "indian",
+    "irish", "italian", "japanese", "jewish", "korean", "latin american",
+    "mediterranean", "mexican", "middle eastern", "nordic", "southern",
+    "spanish", "thai", "vietnamese"
+  ];
+
+  const diets = [
+    "gluten free", "ketogenic", "vegetarian", "lacto-vegetarian",
+    "ovo-vegetarian", "vegan", "pescetarian", "paleo", "primal", "low fodmap",
+    "whole30"
+  ];
+
+  const intolerances = [
+    "diary", "egg", "gluten", "grain", "peanut", "seafood", "sesame",
+    "shellfish", "soy", "sulfite", "tree nut", "wheat"
+  ];
 
   const handleSearch = async () => {
     if (!chips.length) return;
@@ -42,13 +62,13 @@ function Recipes({ chips, filters, onSelectRecipe }) {
           Specify Ingredients
         </button>
 
-        <button 
+        <button
           type="button"
           className="filter-button"
-          onClick={``}
+          onClick={() => setShowFilters((prev) => !(prev))}
           disabled={loading}
         >
-          Filters
+          {showFilters ? "Filters ▲" : "Filters ▼"}
         </button>
 
         <button
@@ -60,6 +80,97 @@ function Recipes({ chips, filters, onSelectRecipe }) {
           {loading ? "Searching..." : "Search Recipes"}
         </button>
       </div>
+
+      {showFilters && (
+        <div className="filter-panel">
+          <div className="filter-group">
+            <p>Cuisine</p>
+            <div className="checkbox-grid">
+              {cuisines.map((item) => (
+                <label key={item}>
+                  <input
+                    type="checkbox"
+                    checked={filters.cuisine.includes(item)}
+                    onChange={(event) => {
+                      const updated = event.target.checked
+                        ? [...filters.cuisine, item]
+                        : filters.cuisine.filter((i) => i !== item);
+                      setFilters((prev) => ({ ...prev, cuisine: updated }));
+                    }}
+                  />
+                  {item}
+                </label>
+              ))}
+            </div>
+          </div>
+
+
+          <div className="filter-group">
+            <p>Exlude Cuisine</p>
+            <div className="checkbox-grid">
+              {cuisines.map((item) => (
+                <label key={item}>
+                  <input
+                    type="checkbox"
+                    checked={filters.excludeCuisine.includes(item)}
+                    onChange={(event) => {
+                      const updated = event.target.checked
+                        ? [...filters.excludeCuisine, item]
+                        : filters.excludeCuisine.filter((i) => i !== item);
+                      setFilters((prev) => ({ ...prev, excludeCuisine: updated }));
+                    }}
+                  />
+                  {item}
+                </label>
+              ))}
+            </div>
+          </div>
+
+
+          <div className="filter-group">
+            <p>Diets</p>
+            <div className="checkbox-grid">
+              {diets.map((item) => (
+                <label key={item}>
+                  <input
+                    type="checkbox"
+                    checked={filters.diet.includes(item)}
+                    onChange={(event) => {
+                      const updated = event.target.checked
+                        ? [...filters.diet, item]
+                        : filters.diet.filter((i) => i !== item);
+                      setFilters((prev) => ({ ...prev, diet: updated }));
+                    }}
+                  />
+                  {item}
+                </label>
+              ))}
+            </div>
+          </div>
+
+
+          <div className="filter-group">
+            <p>Intolerances</p>
+            <div className="checkbox-grid">
+              {intolerances.map((item) => (
+                <label key={item}>
+                  <input
+                    type="checkbox"
+                    checked={filters.intolerances.includes(item)}
+                    onChange={(event) => {
+                      const updated = event.target.checked
+                        ? [...filters.intolerances, item]
+                        : filters.intolerances.filter((i) => i !== item);
+                      setFilters((prev) => ({ ...prev, intolerances: updated }));
+                    }}
+                  />
+                  {item}
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {error && <p className="recipes-error">{error}</p>}
 

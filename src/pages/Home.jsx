@@ -30,6 +30,7 @@ function Home() {
           <Recipes
             chips={chips}
             filters={filters}
+            setFilters={setFilters}
             onSelectRecipe={setSelectedRecipeId}
           />
         )}

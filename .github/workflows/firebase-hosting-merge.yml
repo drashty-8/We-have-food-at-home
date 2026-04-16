@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
       env:
-         SPOONACULAR_API_KEY : ${{ secrets.SPOONACULAR_API_KEY }}
+         VITE_SPOONACULAR_API_KEY: ${{ secrets.SPOONACULAR_API_KEY }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

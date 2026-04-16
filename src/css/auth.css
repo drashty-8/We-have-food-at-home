@@ -1,0 +1,76 @@
+body {
+    background: #FFE797;
+}
+.auth-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.card {
+    background-color: #fff8e7;
+    width: 380px;
+    padding: 0;
+    border-radius: 16px;
+    border: 1.5px solid #e6c84a;
+}
+.card-body input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #e6c84a;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: #fffdf0;
+    box-sizing: border-box;
+    margin-top: 4px;
+}
+.card-body input:focus {
+    outline: none;
+    border-color: #84994F;
+    background: #ffffff;
+}
+.card-body label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #5a3e00;
+}
+.card-body button {
+    width: 100%;
+    padding: 11px;
+    background-color: #84994F;
+    border: 1.5px solid #84994F;
+    border-radius: 8px;
+    color: #fffdf0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+.card-body button:hover {
+    background-color: #587a2e;
+    cursor: pointer;
+}
+.card-header {
+    background-color: #84994F;
+    text-align: center;
+    margin-bottom: 0 rem;
+    padding: 1.5rem;
+    border-radius: 14px 14px 0 0;
+}
+.card-header h2 {
+    color: #fffdf0;
+    margin: 0;
+    font-size: 1.4rem;
+}
+.card-header p {
+    color: #fffdf0;
+    margin: 6px 0 0 0;
+    font-size: 0.9rem;
+}
+.card-body {
+        padding: 2rem;
+}
+.card-body p {
+    font-size: 0.9rem;
+    color: #5a3e00;    
+}

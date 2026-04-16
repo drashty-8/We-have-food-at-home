@@ -10,11 +10,16 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: npm ci && npm run build
-      env:
-         VITE_SPOONACULAR_API_KEY: ${{ secrets.SPOONACULAR_API_KEY }}
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install and Build
+        run: npm ci && npm run build
+        env:
+          VITE_SPOONACULAR_API_KEY: ${{ secrets.SPOONACULAR_API_KEY }}
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_WE_HAVE_FOOD_AT_HOME_8EEAE }}

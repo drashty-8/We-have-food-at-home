@@ -1,6 +1,7 @@
 import "../css/RecipeDetails.css";
 import { useEffect, useState } from "react";
 import { fetchRecipeDetails, fetchRecipeSteps } from "../utils/api";
+import DOMPurify from "dompurify";
 
 function RecipeDetails({ recipeId, onBack }) {
   const [recipeDetails, setRecipeDetails] = useState(null);
@@ -90,6 +91,12 @@ function RecipeDetails({ recipeId, onBack }) {
       />
 
       <h2 className="recipe-details-title">{recipeDetails.title}</h2>
+
+      <div className="recipe-summary" 
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(recipeDetails.summary)
+        }}
+      />
 
       <div className="recipe-meta">
         <span className="recipe-meta-item">

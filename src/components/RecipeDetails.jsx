@@ -94,7 +94,7 @@ function RecipeDetails({ recipeId, onBack }) {
 
       <div className="recipe-summary" 
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(recipeDetails.summary)
+          __html: DOMPurify.sanitize(recipeDetails.summary, {FORBID_TAGS: ['a']})
         }}
       />
 

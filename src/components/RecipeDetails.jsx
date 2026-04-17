@@ -40,7 +40,7 @@ function RecipeDetails({ recipeId, onBack }) {
       }
     };
 
-    loadRecipe();    
+    loadRecipe();
 
     // Prevent old, stale API data from appearing after new data.
     // This return function is called anytime useEffect is called, before
@@ -81,30 +81,54 @@ function RecipeDetails({ recipeId, onBack }) {
 
   return (
     <div>
-      <button onClick={onBack}>Back</button>
-      <img src={recipeDetails.image} alt={recipeDetails.title} />
-      <h2>{recipeDetails.title}</h2>
-      {`<p>Summary: {recipeDetails.summary}</p>`}
-      <p>Servings: {recipeDetails.servings}</p>
-      <p>Total Time: {recipeDetails.readyInMinutes || "Not specified"}</p>
-      <p>Prep Time: {recipeDetails.preparationMinutes || "Not specified"}</p>
-      <p>Cook Time: {recipeDetails.cookingMinutes || "Not specified"}</p>
+      <button className="back-button" onClick={onBack}>← Back</button>
 
-      <div className="ingredients-list">
-        {recipeDetails.extendedIngredients.map((ingredient) => (
-          <p>{ingredient.name}, {ingredient.amount} {ingredient.unit}</p>
-        ))}
+      <img
+        className="recipe-details-img"
+        src={recipeDetails.image}
+        alt={recipeDetails.title}
+      />
+
+      <h2 className="recipe-details-title">{recipeDetails.title}</h2>
+
+      <div className="recipe-meta">
+        <span className="recipe-meta-item">
+          <strong>Servings:</strong> {recipeDetails.servings}
+        </span>
+        <span className="recipe-meta-item">
+          <strong>Total:</strong> {recipeDetails.readyInMinutes || "—"} min
+        </span>
+        <span className="recipe-meta-item">
+          <strong>Prep:</strong> {recipeDetails.preparationMinutes || "—"} min
+        </span>
+        <span className="recipe-meta-item">
+          <strong>Cook:</strong> {recipeDetails.cookingMinutes || "—"} min
+        </span>
       </div>
 
-      <div className="recipe-steps">
-        {recipeSteps.map((section, sectionIndex) => (
-          <div className="steps-section">
-            <p>Section: {section.name || "No section name"}</p>
+      <div className="ingredients-section">
+        <h3>Ingredients</h3>
+        <div className="ingredients-list">
+          {recipeDetails.extendedIngredients.map((ingredient) => (
+            <p className="ingredient-item" key={ingredient.id}>
+              {ingredient.amount} {ingredient.unit} — {ingredient.name}
+            </p>
+          ))}
+        </div>
+      </div>
 
+      <div className="steps-section">
+        <h3>Instructions</h3>
+        {recipeSteps.map((section, sectionIndex) => (
+          <div key={sectionIndex}>
+            {section.name && (
+              <p className="steps-section-name">{section.name}</p>
+            )}
             {section.steps.map((item) => (
-              <p className="steps-instructions">
-                {item.number}. {item.step}
-              </p>
+              <div className="step-item" key={item.number}>
+                <span className="step-number">{item.number}</span>
+                <span className="step-text">{item.step}</span>
+              </div>
             ))}
           </div>
         ))}

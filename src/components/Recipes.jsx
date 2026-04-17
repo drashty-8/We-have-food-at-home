@@ -39,7 +39,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe }) {
       const ingredientNames = chips.map((chip) => {
         return chip.name
       });
-      const results = await searchRecipesByIngredients(ingredientNames, filters, 12);
+      const results = await searchRecipesByIngredients(ingredientNames, filters, 40);
       setRecipes(results);
       setHasSearched(true);
     } catch (err) {

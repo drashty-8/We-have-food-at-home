@@ -1,7 +1,12 @@
 import "../css/NavBar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function NavBar() {
+  const location = useLocation();
+  const hideOn = ["/login", "/register"];
+
+  if (hideOn.includes(location.pathname)) return null;
+  
   return (
     <nav className="navbar">
       <div className="navbar-brand">

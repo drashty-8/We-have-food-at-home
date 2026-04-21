@@ -55,15 +55,6 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe }) {
       <div className="recipe-filters">
         <button
           type="button"
-          className="specify-ingredients-button"
-          onClick={``}
-          disabled={loading || !chips.length}
-        >
-          Specify Ingredients
-        </button>
-
-        <button
-          type="button"
           className="filter-button"
           onClick={() => setShowFilters((prev) => !(prev))}
           disabled={loading}

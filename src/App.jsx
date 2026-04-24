@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Favorites from "./pages/Favorites"; 
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/account" element={<Account />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

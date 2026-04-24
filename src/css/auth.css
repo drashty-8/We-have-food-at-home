@@ -9,8 +9,10 @@ body {
 }
 .card {
     background-color: #fff8e7;
-    width: 380px;
-    padding: 0;
+    width: 90%;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 20px;
     border-radius: 16px;
     border: 1.5px solid #e6c84a;
 }

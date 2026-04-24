@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { db, auth } from "../config/firebase";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import RecipeCard from "../components/RecipeCard";
-import RecipeDetails from "../components/RecipeDetails";
+import RecipeDetails from "../components/RecipeDetails"; 
 import "../css/Favorites.css";
 
 function Favorites() {
-  
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
   useEffect(() => {
@@ -62,7 +60,7 @@ function Favorites() {
             <RecipeCard 
               key={recipe.id} 
               recipe={recipe} 
-              onClick={() => setSelectedRecipeId(recipe.id)}
+              onClick={() => setSelectedRecipeId(recipe.id)} 
             />
           ))}
         </div>

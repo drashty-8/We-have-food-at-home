@@ -3,7 +3,7 @@ import { db, auth } from "../config/firebase";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails"; 
-import "../css/Favorites.css";
+import "../css/favorites.css";
 
 function Favorites() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);

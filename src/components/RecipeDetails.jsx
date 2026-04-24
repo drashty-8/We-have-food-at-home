@@ -1,6 +1,8 @@
 import "../css/RecipeDetails.css";
 import { useEffect, useState } from "react";
 import { fetchRecipeDetails, fetchRecipeSteps } from "../utils/api";
+import { db, auth } from "../config/firebase";
+import { doc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import DOMPurify from "dompurify";
 
 function RecipeDetails({ recipeId, onBack }) {
@@ -8,8 +10,22 @@ function RecipeDetails({ recipeId, onBack }) {
   const [recipeSteps, setRecipeSteps] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  // Load the recipe details on page load.
+  // 1. REAL-TIME FAVORITE SYNC
+  useEffect(() => {
+    if (!auth.currentUser || !recipeId) return;
+
+    const favRef = doc(db, "users", auth.currentUser.uid, "favorites", recipeId.toString());
+    
+    const unsubscribe = onSnapshot(favRef, (docSnap) => {
+      setIsFavorite(docSnap.exists());
+    });
+
+    return () => unsubscribe();
+  }, [recipeId]);
+
+  // 2. API DATA LOAD
   useEffect(() => {
     let cancelled = false;
 
@@ -18,8 +34,6 @@ function RecipeDetails({ recipeId, onBack }) {
       setError(null);
 
       try {
-        // Promise allows multiple API calls concurrently; reduces wait
-        // time (i.e., 2 x 500ms = 500ms, instead of 1000ms).
         const [details, steps] = await Promise.all([
           fetchRecipeDetails(recipeId),
           fetchRecipeSteps(recipeId),
@@ -42,46 +56,57 @@ function RecipeDetails({ recipeId, onBack }) {
     };
 
     loadRecipe();
-
-    // Prevent old, stale API data from appearing after new data.
-    // This return function is called anytime useEffect is called, before
-    // it starts from the top.
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [recipeId]);
 
-  if (loading) {
-    return (
-      <div>
-        <button onClick={onBack}>Back</button>
-        <p>Loading recipe details...</p>
-      </div>
-    );
-  }
+  // 3. TOGGLE FAVORITE HANDLER
+  const handleToggleFavorite = async () => {
+    if (!auth.currentUser) {
+      alert("Please log in to save favorites!");
+      return;
+    }
 
-  if (error) {
-    return (
-      <div>
-        <button onClick={onBack}>Back</button>
-        <p className="recipes-error">{error}</p>
-      </div>
-    );
-  }
+    const favRef = doc(db, "users", auth.currentUser.uid, "favorites", recipeId.toString());
 
-  if (!recipeDetails) {
-    return (
-      <div>
-        <button onClick={onBack}>Back</button>
-        <p>Recipe not found.</p>
-      </div>
-    );
-  }
+    try {
+      if (isFavorite) {
+        await deleteDoc(favRef);
+      } else {
+        await setDoc(favRef, {
+          id: recipeId,
+          title: recipeDetails.title,
+          image: recipeDetails.image,
+          addedAt: new Date()
+        });
+      }
+    } catch (err) {
+      console.error("Error updating favorites:", err);
+    }
+  };
 
-  console.log(recipeSteps);
+  if (loading) return (
+    <div className="details-state">
+      <button className="back-button" onClick={onBack}>← Back</button>
+      <p>Loading your next meal...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div className="details-state">
+      <button className="back-button" onClick={onBack}>← Back</button>
+      <p className="recipes-error">{error}</p>
+    </div>
+  );
+
+  if (!recipeDetails) return (
+    <div className="details-state">
+      <button className="back-button" onClick={onBack}>← Back</button>
+      <p>Recipe not found.</p>
+    </div>
+  );
 
   return (
-    <div>
+    <div className="recipe-details-container">
       <button className="back-button" onClick={onBack}>← Back</button>
 
       <img
@@ -99,18 +124,10 @@ function RecipeDetails({ recipeId, onBack }) {
       />
 
       <div className="recipe-meta">
-        <span className="recipe-meta-item">
-          <strong>Servings:</strong> {recipeDetails.servings}
-        </span>
-        <span className="recipe-meta-item">
-          <strong>Total:</strong> {recipeDetails.readyInMinutes || "—"} min
-        </span>
-        <span className="recipe-meta-item">
-          <strong>Prep:</strong> {recipeDetails.preparationMinutes || "—"} min
-        </span>
-        <span className="recipe-meta-item">
-          <strong>Cook:</strong> {recipeDetails.cookingMinutes || "—"} min
-        </span>
+        <span className="recipe-meta-item"><strong>Servings:</strong> {recipeDetails.servings}</span>
+        <span className="recipe-meta-item"><strong>Total:</strong> {recipeDetails.readyInMinutes || "—"} min</span>
+        <span className="recipe-meta-item"><strong>Prep:</strong> {recipeDetails.preparationMinutes || "—"} min</span>
+        <span className="recipe-meta-item"><strong>Cook:</strong> {recipeDetails.cookingMinutes || "—"} min</span>
       </div>
 
       <div className="ingredients-section">
@@ -127,10 +144,8 @@ function RecipeDetails({ recipeId, onBack }) {
       <div className="steps-section">
         <h3>Instructions</h3>
         {recipeSteps.map((section, sectionIndex) => (
-          <div key={sectionIndex}>
-            {section.name && (
-              <p className="steps-section-name">{section.name}</p>
-            )}
+          <div key={sectionIndex} className="instruction-group">
+            {section.name && <p className="steps-section-name">{section.name}</p>}
             {section.steps.map((item) => (
               <div className="step-item" key={item.number}>
                 <span className="step-number">{item.number}</span>
@@ -139,6 +154,17 @@ function RecipeDetails({ recipeId, onBack }) {
             ))}
           </div>
         ))}
+      </div>
+
+      <div className="recipe-footer">
+        <hr className="footer-divider" />
+        <p>Enjoyed this recipe?</p>
+        <button 
+          className={`favorite-btn-bottom ${isFavorite ? "active" : ""}`} 
+          onClick={handleToggleFavorite}
+        >
+          {isFavorite ? "❤️ Saved to Favorites" : "🤍 Save for Later"}
+        </button>
       </div>
     </div>
   );

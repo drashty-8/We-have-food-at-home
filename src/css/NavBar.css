@@ -1,28 +1,54 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 2rem;
-  padding: 1rem 6rem;
-  font-size: 1.4em;
-  border-bottom: 1px solid #ddd;
+display: flex;
+justify-content: space-between;
+align-items: center;
+min-height: 4rem;
+padding: 1rem 6rem;
+font-size: 1.2em;
+border-bottom: 1px solid #ddd;
 }
 
 .navbar a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.2s;
 }
 
 .navbar-brand a {
   font-weight: bold;
+  white-space: nowrap; 
 }
 
 .navbar-links {
   display: flex;
   padding: 0.5rem;
   gap: 2rem;
+  align-items: center;
 }
 
 .navbar-links a:hover {
-  text-decoration: underline;
+  color: #ff4b4b;
+}
+
+/* --- RESPONSIVE SECTION --- */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem 2rem; 
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column; 
+    padding: 1rem;
+    height: auto;
+  }
+
+  .navbar-links {
+    gap: 1.2rem; 
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
 }

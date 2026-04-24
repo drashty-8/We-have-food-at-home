@@ -5,7 +5,7 @@
 }
 
 .fav-title {
-  color: #588157; /* Dark Sage */
+  color: #588157; 
   text-align: center;
   margin-bottom: 30px;
   font-size: 2rem;
@@ -14,11 +14,10 @@
 .no-favs {
   text-align: center;
   margin-top: 100px;
-  color: #a3b18a; /* Light Sage */
+  color: #a3b18a;
   font-size: 1.2rem;
 }
 
-/* Ensure the grid matches your Home page grid */
 .recipe-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

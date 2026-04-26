@@ -12,9 +12,12 @@ function RecipeDetails({ recipe, onBack }) {
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const recipeId = recipe.id;
-  const missingIngredientIDs = new Set(recipe.missedIngredients.map(
-    ingredient => ingredient.id
-  ));
+  // const missingIngredientIDs = new Set(recipe.missedIngredients.map(
+  //   ingredient => ingredient.id
+  // ));
+  const missingIngredientIDs = new Set(
+    (recipe.missedIngredients || []).map(ingredient => ingredient.id)
+  )
 
   // 1. REAL-TIME FAVORITE SYNC
   useEffect(() => {

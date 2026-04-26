@@ -175,7 +175,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe }) {
           <RecipeCard
             key={recipe.id}
             recipe={recipe}
-            onClick={() => onSelectRecipe(recipe.id)}
+            onClick={() => onSelectRecipe(recipe)}
           />
         ))}
       </div>

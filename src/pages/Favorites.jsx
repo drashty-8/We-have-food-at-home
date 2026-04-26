@@ -8,7 +8,7 @@ import "../css/favorites.css";
 function Favorites() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
@@ -37,11 +37,11 @@ function Favorites() {
   if (loading) return <div className="fav-msg">Loading...</div>;
   if (!auth.currentUser) return <div className="fav-msg">Please log in to see favorites.</div>;
 
-  if (selectedRecipeId) {
+  if (selectedRecipe) {
     return (
       <RecipeDetails 
-        recipeId={selectedRecipeId} 
-        onBack={() => setSelectedRecipeId(null)} 
+        recipe={selectedRecipe} 
+        onBack={() => setSelectedRecipe(null)} 
       />
     );
   }
@@ -60,7 +60,7 @@ function Favorites() {
             <RecipeCard 
               key={recipe.id} 
               recipe={recipe} 
-              onClick={() => setSelectedRecipeId(recipe.id)} 
+              onClick={() => setSelectedRecipe(recipe)} 
             />
           ))}
         </div>

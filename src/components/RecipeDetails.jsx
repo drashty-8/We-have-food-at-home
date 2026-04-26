@@ -5,12 +5,16 @@ import { db, auth } from "../config/firebase";
 import { doc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import DOMPurify from "dompurify";
 
-function RecipeDetails({ recipeId, onBack }) {
+function RecipeDetails({ recipe, onBack }) {
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [recipeSteps, setRecipeSteps] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const recipeId = recipe.id;
+  const missingIngredientIDs = new Set(recipe.missedIngredients.map(
+    ingredient => ingredient.id
+  ));
 
   // 1. REAL-TIME FAVORITE SYNC
   useEffect(() => {
@@ -84,6 +88,19 @@ function RecipeDetails({ recipeId, onBack }) {
     }
   };
 
+  const addToShoppingList = async() => {
+    recipe.missedIngredients.map((ingredient) => {
+      const ingredientName = ingredient.name;
+      const ingredientAmount = ingredient.amount;
+      const ingredientUnit = ingredient.unitShort;
+
+      console.log(ingredientName, ingredientAmount, ingredientUnit)
+
+      // Add functionality to upload this to database.
+    })
+
+  }
+
   if (loading) return (
     <div className="details-state">
       <button className="back-button" onClick={onBack}>← Back</button>
@@ -132,14 +149,19 @@ function RecipeDetails({ recipeId, onBack }) {
 
       <div className="ingredients-section">
         <h3>Ingredients</h3>
+        
         <div className="ingredients-list">
           {recipeDetails.extendedIngredients.map((ingredient) => (
             <p className="ingredient-item" key={ingredient.id}>
-              {ingredient.amount} {ingredient.unit} — {ingredient.name}
+              {ingredient.amount} {ingredient.unit} — {ingredient.name} {missingIngredientIDs.has(ingredient.id) ? <span className="missing-tag">(missing)</span> : ""}
             </p>
           ))}
         </div>
+
+        <button className="add-list-button" onClick={addToShoppingList}>Add Missing Ingredients to Shopping List</button>
       </div>
+
+      
 
       <div className="steps-section">
         <h3>Instructions</h3>

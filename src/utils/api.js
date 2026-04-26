@@ -54,22 +54,21 @@ export async function searchRecipesByIngredients(ingredientNames, filters, numbe
     includeIngredients: formatted,
     sort: "max-used-ingredients",
     number,
+    fillIngredients: true,
   };
 
-  // Handle filtesr.
+  // Handle filters.
   if (filters.cuisine) params.cuisine = filters.cuisine.join(",");
   if (filters.excludeCuisine) params.excludeCuisine = filters.excludeCuisine.join(",");
   if (filters.diet) params.diet = filters.diet.join(",");
   if (filters.intolerances) params.intolerances = filters.intolerances.join(",");
-  console.log(params.intolerances);
 
   const data = await spoonFetch("/recipes/complexSearch", params);
-
-  console.log(params);
 
   // Technically not correct, but works.
   // Should probably be return data.results ?? [];
   if (data.results) {
+    console.log(data.results);
     return data.results;
   } else {
     return [];

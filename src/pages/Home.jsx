@@ -6,13 +6,16 @@ import { useState } from "react";
 
 function Home() {
   const [chips, setChips] = useState([]); // [{ id, name }]
-  const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [filters, setFilters] = useState({
     cuisine: [],
     excludeCuisine: [],
     diet: [],
     intolerances: [],
   });
+
+  console.log("Selected recipe in Home.jsx:");
+  console.log(selectedRecipe);
 
   return (
     <div className="primary-content">
@@ -21,17 +24,20 @@ function Home() {
       </div>
 
       <div className="recipes-pane">
-        {selectedRecipeId ? (
-          <RecipeDetails
-            recipeId={selectedRecipeId}
-            onBack={() => setSelectedRecipeId(null)}
-          />
+        {selectedRecipe ? (
+          <>
+            {console.log("Passing to RecipeDetails: ", selectedRecipe)}
+            <RecipeDetails
+              recipe={selectedRecipe}
+              onBack={() => setSelectedRecipe(null)}
+            />
+          </>
         ) : (
           <Recipes
             chips={chips}
             filters={filters}
             setFilters={setFilters}
-            onSelectRecipe={setSelectedRecipeId}
+            onSelectRecipe={setSelectedRecipe}
           />
         )}
       </div>

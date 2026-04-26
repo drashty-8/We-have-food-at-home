@@ -8,7 +8,9 @@ import { loadPantry, savePantry } from "../utils/db";
 
 function Home() {
   const [chips, setChips] = useState([]); // [{ id, name }]
+  const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false); // differentiates whether a blank screen is no recipes, or not yet searched
   const [filters, setFilters] = useState({
     cuisine: [],
     excludeCuisine: [],
@@ -64,6 +66,10 @@ function Home() {
             filters={filters}
             setFilters={setFilters}
             onSelectRecipe={setSelectedRecipe}
+            recipes={recipes}
+            setRecipes={setRecipes}
+            hasSearched={hasSearched}
+            setHasSearched={setHasSearched}
           />
         )}
       </div>

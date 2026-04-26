@@ -3,12 +3,12 @@ import "../css/Recipes.css";
 import { useState } from "react";
 import { searchRecipesByIngredients } from "../utils/api";
 
-function Recipes({ chips, filters, setFilters, onSelectRecipe }) {
-  const [recipes, setRecipes] = useState([]);
+function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecipes, hasSearched, setHasSearched }) {
+  // const [recipes, setRecipes] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [hasSearched, setHasSearched] = useState(false); // differentiates whether a blank screen is no recipes, or not yet searched
+  // const [hasSearched, setHasSearched] = useState(false); // differentiates whether a blank screen is no recipes, or not yet searched
 
   const cuisines = [
     "african", "asian", "american", "british", "cajun", "caribbean", "chinese",

@@ -2,7 +2,9 @@ import "../css/Home.css";
 import Pantry from "../components/Pantry";
 import Recipes from "../components/Recipes";
 import RecipeDetails from "../components/RecipeDetails";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { auth } from "../config/firebase";
+import { loadPantry, savePantry } from "../utils/db";
 
 function Home() {
   const [chips, setChips] = useState([]); // [{ id, name }]
@@ -16,7 +18,31 @@ function Home() {
 
   console.log("Selected recipe in Home.jsx:");
   console.log(selectedRecipe);
+  
 
+//loads pantry when page opens
+  useEffect(() => {
+  const unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      const pantry = await loadPantry(user.uid);
+      setChips(pantry);
+    }
+  });
+  return () => unsubscribeAuth();
+}, []); //[] means run when page loads
+
+  //saves pantry whenever chips change
+  useEffect(() => {
+    const save = async() => {
+      const user = auth.currentUser;
+      if(user && chips.length > 0) {
+        await savePantry(user.uid, chips);
+      }
+    };
+    save();
+  }, [chips]); //run when chips change
+  
+  
   return (
     <div className="primary-content">
       <div className="pantry-pane">

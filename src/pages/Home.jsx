@@ -37,7 +37,7 @@ function Home() {
   useEffect(() => {
     const save = async() => {
       const user = auth.currentUser;
-      if(user && chips.length >= 0) {
+      if(user) {
         await savePantry(user.uid, chips);
       }
     };

@@ -25,7 +25,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
   ];
 
   const intolerances = [
-    "diary", "egg", "gluten", "grain", "peanut", "seafood", "sesame",
+    "dairy", "egg", "gluten", "grain", "peanut", "seafood", "sesame",
     "shellfish", "soy", "sulfite", "tree nut", "wheat"
   ];
 

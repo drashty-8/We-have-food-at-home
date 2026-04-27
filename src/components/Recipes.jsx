@@ -97,7 +97,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
 
 
           <div className="filter-group">
-            <p>Exlude Cuisine</p>
+            <p>Exclude Cuisine</p>
             <div className="checkbox-grid">
               {cuisines.map((item) => (
                 <label key={item}>

@@ -2,14 +2,26 @@ import "../css/Pantry.css";
 import { useEffect, useState } from "react";
 import { fetchIngredientSuggestions } from "../utils/api";
 import { useDebouncedValue } from "../utils/hooks";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 function Pantry({ chips, setChips }) {
   const [ingredientQuery, setIngredientQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Debounce the query so we don't fire on every keystroke.
   const debouncedQuery = useDebouncedValue(ingredientQuery, 300);
+
+  //
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsLoggedIn(!!user);
+    });
+    return () => unsubscribe();
+  }, []);
+
 
   // Fetch autocomplete suggestions when the debounced query changes.
   useEffect(() => {
@@ -56,9 +68,7 @@ function Pantry({ chips, setChips }) {
     };
 
     // Prevent duplicates.
-    const exists = chips.some((chip) => {
-      chip.id === newChip.id
-    });
+    const exists = chips.some((chip) => chip.id === newChip.id);
     if (exists) {
       setIngredientQuery("");
       setSuggestions([]);
@@ -83,6 +93,12 @@ function Pantry({ chips, setChips }) {
 
   return (
     <div className="pantry">
+      {!isLoggedIn && (
+        <p className="pantry-hint">
+          <em>Sign in to save your pantry across sessions.</em>
+        </p>
+      )}
+
       <input
         type="text"
         placeholder="Search for an ingredient..."

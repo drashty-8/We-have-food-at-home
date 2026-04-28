@@ -29,7 +29,7 @@ function Home() {
       chips={chips}
       filters={filters}
       setFilters={setFilters}
-      onSelectedRecipe={setSelectedRecipe}
+      onSelectRecipe={setSelectedRecipe}
       recipes={recipes}
       setRecipes={setRecipes}
       hasSearched={hasSearched}

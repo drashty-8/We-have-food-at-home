@@ -21,13 +21,14 @@ function Home() {
   console.log("Selected recipe in Home.jsx:");
   console.log(selectedRecipe);
   
-
+const [loaded, setLoaded] = useState(false); //tracks if pantry has loaded
 //loads pantry when page opens
   useEffect(() => {
   const unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
     if (user) {
       const pantry = await loadPantry(user.uid);
       setChips(pantry);
+      setLoaded(true); //mark pantry as loaded
     }
   });
   return () => unsubscribeAuth();
@@ -35,14 +36,15 @@ function Home() {
 
   //saves pantry whenever chips change
   useEffect(() => {
+    if (!loaded) return; // don't save until we've loaded first
     const save = async() => {
       const user = auth.currentUser;
-      if(user && chips.length >= 0) {
+      if(user) {
         await savePantry(user.uid, chips);
       }
     };
     save();
-  }, [chips]); //run when chips change
+  }, [chips, loaded]); //run when chips change
   
   
   return (

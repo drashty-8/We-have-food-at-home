@@ -1,11 +1,8 @@
-body {
-    background: #FFE797;
-}
 .auth-container {
     display: grid;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    background: #FFE797;
 }
 .card {
     background-color: #fff8e7;

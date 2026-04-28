@@ -1,25 +1,26 @@
-import NavBar from "./components/NavBar";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
-import Account from "./pages/Account";
 import Login from "./pages/Login";
+import Account from "./pages/Account";
 import Register from "./pages/Register";
 import Favorites from "./pages/Favorites"; 
+import Recents from "./pages/Recents";
+import ShoppingList from "./pages/ShoppingList";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <NavBar />
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </main>
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/recents" element={<Recents />} />
+        <Route path="/shopping-list" element={<ShoppingList />} />
+        <Route path="/account" element={<Account />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 }
 

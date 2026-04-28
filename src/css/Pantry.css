@@ -63,3 +63,9 @@
   font-size: 13px;
   margin: 4px 0;
 }
+
+.pantry-hint {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 8px;
+}

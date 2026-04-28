@@ -2,7 +2,7 @@ function ShoppingList() {
     return (
         <div>
             <h2>Shopping List</h2>
-            <p>Ingredients you n eed will appear here.</p>
+            <p>Ingredients you need will appear here.</p>
         </div>
     );
 }

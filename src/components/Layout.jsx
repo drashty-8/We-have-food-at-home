@@ -8,6 +8,7 @@ import { loadPantry, savePantry } from "../utils/db";
 
 function Layout() {
   const [chips, setChips] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   // Load pantry when a user signs in
   useEffect(() => {
@@ -15,16 +16,19 @@ function Layout() {
       if (user) {
         const pantry = await loadPantry(user.uid);
         setChips(pantry);
+        setLoaded(true);
       } else {
         // Clear pantry on logout so next user doesn't see old chips
         setChips([]);
+        setLoaded(false);
       }
     });
     return () => unsubscribeAuth();
   }, []); // [] means run when page loads
 
-  // Save pantry whenever chips change (when logged in)
+  // Save pantry whenever chips change — but only after the initial load
   useEffect(() => {
+    if (!loaded) return;
     const save = async () => {
       const user = auth.currentUser;
       if (user) {
@@ -32,7 +36,8 @@ function Layout() {
       }
     };
     save();
-  }, [chips]);
+  }, [chips, loaded]);
+
 
   return (
     <>

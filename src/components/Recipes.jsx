@@ -203,7 +203,7 @@ const handleClearFilters = () => {
         <p>No recipes found. Try adding more ingredients.</p>
       )}
 
-      <div className="recipe-grid">
+    <div className="recipe-grid">
         {recipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
@@ -211,7 +211,6 @@ const handleClearFilters = () => {
             onClick={() => onSelectRecipe(recipe)}
           />
         ))}
-      </div>
     </div>
   );
 }

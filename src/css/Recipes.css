@@ -62,6 +62,47 @@
   text-transform: capitalize;
 }
 
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #ddd; /* Separates the buttons from the checkboxes */
+  width: 100%;
+}
+
+.clear-filters-btn {
+  background: #fff;
+  color: #666;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.clear-filters-btn:hover {
+  background: #f5f5f5;
+  border-color: #999;
+}
+
+.apply-filters-btn {
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.apply-filters-btn:hover {
+  background: #1b4332;
+}
+
 .checkbox-grid {
   display: flex;
   flex-wrap: wrap;

@@ -50,7 +50,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
     }
   };
 
-const handleClearFilters = () => {
+  const handleClearFilters = () => {
     setFilters({
       cuisine: [],
       excludeCuisine: [],
@@ -63,7 +63,7 @@ const handleClearFilters = () => {
     setShowFilters(false);
     handleSearch();
   };
-  
+
   return (
     <div className="recipes">
       <div className="recipe-filters">
@@ -174,20 +174,18 @@ const handleClearFilters = () => {
               ))}
             </div>
           </div>
-        </div>
-      )}
 
-<div className="filter-actions">
-            <button 
-              type="button" 
-              className="clear-filters-btn" 
+          <div className="filter-actions">
+            <button
+              type="button"
+              className="clear-filters-btn"
               onClick={handleClearFilters}
             >
               Clear All
             </button>
-            <button 
-              type="button" 
-              className="apply-filters-btn" 
+            <button
+              type="button"
+              className="apply-filters-btn"
               onClick={handleApplyFilters}
             >
               Apply Filters
@@ -195,7 +193,7 @@ const handleClearFilters = () => {
           </div>
         </div>
       )}
-      
+
       {error && <p className="recipes-error">{error}</p>}
 
       {/* If there are no results from the search, display messsage */}
@@ -203,7 +201,7 @@ const handleClearFilters = () => {
         <p>No recipes found. Try adding more ingredients.</p>
       )}
 
-    <div className="recipe-grid">
+      <div className="recipe-grid">
         {recipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
@@ -211,6 +209,7 @@ const handleClearFilters = () => {
             onClick={() => onSelectRecipe(recipe)}
           />
         ))}
+      </div>
     </div>
   );
 }

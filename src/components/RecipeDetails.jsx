@@ -2,7 +2,7 @@ import "../css/RecipeDetails.css";
 import { useEffect, useState } from "react";
 import { fetchRecipeDetails, fetchRecipeSteps } from "../utils/api";
 import { db, auth } from "../config/firebase";
-import { doc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import DOMPurify from "dompurify";
 
 function RecipeDetails({ recipe, onBack }) {
@@ -12,9 +12,7 @@ function RecipeDetails({ recipe, onBack }) {
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const recipeId = recipe.id;
-  // const missingIngredientIDs = new Set(recipe.missedIngredients.map(
-  //   ingredient => ingredient.id
-  // ));
+
   const missingIngredientIDs = new Set(
     (recipe.missedIngredients || []).map(ingredient => ingredient.id)
   )
@@ -91,18 +89,41 @@ function RecipeDetails({ recipe, onBack }) {
     }
   };
 
-  const addToShoppingList = async() => {
-    recipe.missedIngredients.map((ingredient) => {
-      const ingredientName = ingredient.name;
-      const ingredientAmount = ingredient.amount;
-      const ingredientUnit = ingredient.unitShort;
+  // 4.ADD TO SHOPPING LIST LOGIC 
+  const addToShoppingList = async () => {
+    // Check if user is logged in
+    if (!auth.currentUser) {
+      alert("Please log in to add items to your shopping list!");
+      return;
+    }
 
-      console.log(ingredientName, ingredientAmount, ingredientUnit)
+    // Check if there are ingredients to add
+    if (!recipe.missedIngredients || recipe.missedIngredients.length === 0) {
+      alert("No missing ingredients found for this recipe.");
+      return;
+    }
 
-      // Add functionality to upload this to database.
-    })
+    const shoppingListRef = collection(db, "users", auth.currentUser.uid, "shoppingList");
 
-  }
+    try {
+      const uploadPromises = recipe.missedIngredients.map((ingredient) => {
+        return addDoc(shoppingListRef, {
+          name: ingredient.name,
+          amount: ingredient.amount,
+          unit: ingredient.unitShort || ingredient.unit,
+          recipeTitle: recipe.title, 
+          addedAt: new Date(),
+          completed: false
+        });
+      });
+
+      await Promise.all(uploadPromises);
+      alert(`${recipe.missedIngredients.length} missing ingredients added to your shopping list!`);
+    } catch (err) {
+      console.error("Error adding to shopping list:", err);
+      alert("Failed to add items to shopping list.");
+    }
+  };
 
   if (loading) return (
     <div className="details-state">
@@ -161,10 +182,10 @@ function RecipeDetails({ recipe, onBack }) {
           ))}
         </div>
 
-        <button className="add-list-button" onClick={addToShoppingList}>Add Missing Ingredients to Shopping List</button>
+        <button className="add-list-button" onClick={addToShoppingList}>
+          Add Missing Ingredients to Shopping List
+        </button>
       </div>
-
-      
 
       <div className="steps-section">
         <h3>Instructions</h3>

@@ -50,6 +50,20 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
     }
   };
 
+const handleClearFilters = () => {
+    setFilters({
+      cuisine: [],
+      excludeCuisine: [],
+      diet: [],
+      intolerances: []
+    });
+  };
+
+  const handleApplyFilters = () => {
+    setShowFilters(false);
+    handleSearch();
+  };
+  
   return (
     <div className="recipes">
       <div className="recipe-filters">
@@ -163,6 +177,25 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
         </div>
       )}
 
+<div className="filter-actions">
+            <button 
+              type="button" 
+              className="clear-filters-btn" 
+              onClick={handleClearFilters}
+            >
+              Clear All
+            </button>
+            <button 
+              type="button" 
+              className="apply-filters-btn" 
+              onClick={handleApplyFilters}
+            >
+              Apply Filters
+            </button>
+          </div>
+        </div>
+      )}
+      
       {error && <p className="recipes-error">{error}</p>}
 
       {/* If there are no results from the search, display messsage */}

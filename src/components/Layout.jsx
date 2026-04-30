@@ -17,11 +17,11 @@ function Layout() {
       if (user) {
         const [pantry, prefs] = await Promise.all([
           loadPantry(user.uid),
-          loadPreferences(user.id),
+          loadPreferences(user.uid),
         ]);
 
         setChips(pantry);
-        setPreferendces(prefs);
+        setPreferences(prefs);
         setLoaded(true);
       } else {
         // Clear pantry and preferences on logout so next user doesn't see old chips

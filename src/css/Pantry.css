@@ -1,7 +1,18 @@
 .ingredient-input {
   width: 100%;
-  padding: 8px;
+  padding: 8px 12px;
   box-sizing: border-box;
+  border: 1.5px solid #d4ddb8;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: #2C2C2A;
+}
+
+.ingredient-input:focus {
+  outline: none;
+  border-color: #84994F;
+  box-shadow: 0 0 0 3px rgba(132, 153, 79, 0.15);
 }
 
 .suggestions-list {
@@ -14,14 +25,16 @@
 .suggestions-list button {
   text-align: left;
   padding: 6px 10px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
+  background: #ffffff;
+  border: 1px solid #d4ddb8;
   cursor: pointer;
   font-size: 14px;
+  color: #2C2C2A;
 }
 
 .suggestions-list button:hover {
-  background: #eee;
+  background: #EAF3DE;
+  color: #3B6D11;
 }
 
 .chip-row {
@@ -39,14 +52,17 @@
   line-height: 1;
   padding: 8px 12px;
   min-height: 32px;
-  border: 1px solid #cfcfcf;
+  border: 1.5px solid #84994F;
   border-radius: 999px;
-  background: #fff;
+  background: #EAF3DE;
+  color: #3B6D11;
   cursor: pointer;
 }
 
 .chip:hover {
-  background: #f5f5f5;
+  background: #84994F;
+  border-color: #F4A7BB;
+  color: #2C2C2A;
 }
 
 .chip:active {
@@ -54,7 +70,7 @@
 }
 
 .chip:focus-visible {
-  outline: 2px solid #000;
+  outline: 2px solid #84994F;
   outline-offset: 2px;
 }
 
@@ -66,6 +82,13 @@
 
 .pantry-hint {
   font-size: 0.85rem;
-  color: #666;
+  color: #84994F;
   margin-bottom: 8px;
+}
+
+.pantry-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #84994F;
+  text-align: center;
 }

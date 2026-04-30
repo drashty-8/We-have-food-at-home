@@ -48,6 +48,9 @@ export default function Login() {
 
     return (
         <div className="auth-container">
+            <Link to="/" className="auth-logo-link">
+                <img src="/logo.png" alt="We Have Food at Home" className="auth-logo" />
+            </Link>
             <div className="card">
                 <div className="card-header">
                     <h2>We Have Food At Home</h2>

@@ -7,27 +7,31 @@
 .recipe-filters button,
 .recipe-search button {
   padding: 8px 16px;
-  border: 1px solid #ccc;
+  border: 1.5px solid #d4ddb8;
   border-radius: 8px;
-  background: #fff;
+  background: #ffffff;
   cursor: pointer;
   font-size: 0.9rem;
+  color: #2C2C2A;
   transition: background 0.15s;
 }
 
-.recipe-filters button:hover:not(:disabled),
-.recipe-search button:hover:not(:disabled) {
-  background: #f0f0f0;
+.recipe-filters button:hover:not(:disabled) {
+  background: #EAF3DE;
+  border-color: #84994F;
+  color: #3B6D11;
 }
 
-.search-button {
-  background: #2d6a4f !important;
-  color: #fff !important;
-  border-color: #2d6a4f !important;
+.recipe-filters .search-button {
+  background: #84994F;
+  color: #fff;
+  border-color: #84994F;
 }
 
-.search-button:hover:not(:disabled) {
-  background: #1b4332 !important;
+.recipe-filters .search-button:hover:not(:disabled) {
+  background: #3B6D11;
+  border-color: #3B6D11;
+  color: #fff;
 }
 
 .search-button:disabled {
@@ -47,11 +51,11 @@
 }
 
 .filter-panel {
-  border: 1px solid #ddd;
+  border: 1.5px solid #d4ddb8;
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
-  background: #fafafa;
+  background: #ffffff;
 }
 
 .filter-group {
@@ -62,6 +66,7 @@
   font-weight: 600;
   margin-bottom: 6px;
   text-transform: capitalize;
+  color: #3B6D11;
 }
 
 .filter-actions {
@@ -70,14 +75,14 @@
   gap: 12px;
   padding-top: 20px;
   margin-top: 20px;
-  border-top: 1px solid #ddd; /* Separates the buttons from the checkboxes */
+  border-top: 1px solid #d4ddb8;
   width: 100%;
 }
 
 .clear-filters-btn {
-  background: #fff;
-  color: #666;
-  border: 1px solid #ccc;
+  background: #ffffff;
+  color: #2C2C2A;
+  border: 1.5px solid #d4ddb8;
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
@@ -86,12 +91,12 @@
 }
 
 .clear-filters-btn:hover {
-  background: #f5f5f5;
-  border-color: #999;
+  background: #EAF3DE;
+  border-color: #84994F;
 }
 
 .apply-filters-btn {
-  background: #2d6a4f;
+  background: #84994F;
   color: white;
   border: none;
   padding: 8px 20px;
@@ -102,7 +107,8 @@
 }
 
 .apply-filters-btn:hover {
-  background: #1b4332;
+  background: #3B6D11;
+  color: #fff;
 }
 
 .recipe-search {
@@ -115,16 +121,48 @@
 .recipe-search-input {
   flex: 1;
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #d4ddb8;
   border-radius: 8px;
   font-size: 0.95rem;
+  transition: border-color 0.2s;
 }
 
 .recipe-search-input:focus {
   outline: none;
   border-color: #84994F;
+  box-shadow: 0 0 0 3px rgba(132, 153, 79, 0.15);
 }
 
 .recipe-search-input:disabled {
   background: #f5f5f5;
+}
+
+.recipe-search .search-button {
+  background: #84994F;
+  color: #fff;
+  border-color: #84994F;
+}
+
+.recipe-search .search-button:hover:not(:disabled) {
+  background: #3B6D11;
+  border-color: #3B6D11;
+  color: #fff;
+}
+
+.checkbox-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.checkbox-grid label {
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  color: #2C2C2A;
+}
+
+.checkbox-grid input {
+  margin-right: 0.25rem;
+  accent-color: #84994F;
 }

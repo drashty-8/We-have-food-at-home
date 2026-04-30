@@ -43,58 +43,61 @@ function NavBar() {
   // to indicate the page in the NavBar is currently accessed.
   const isActive = (path) => location.pathname === path;
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-brand">
-        <Link to="/">We Have Food at Home</Link>
-      </div>
+return (
+  <nav className="navbar">
+    <div className="navbar-brand">
+      <Link to="/" className="brand-link">
+        <img src="/logo.png" alt="logo" className="navbar-logo" />
+        <span>We Have Food at Home</span>
+      </Link>
+    </div>
 
-      <div className="navbar-links">
-        <Link to="/" className={isActive("/") ? "active" : ""}>Home</Link>
+    <div className="navbar-links">
+      <Link to="/" className={isActive("/") ? "active" : ""}>Home</Link>
 
-        {user ? (
-          <>
-            <Link to="/favorites" className={isActive("/favorites") ? "active" : ""}>Favorites</Link>
-            <Link to="/recents" className={isActive("/recents") ? "active" : ""}>Recents</Link>
-            <Link to="/shopping-list" className={isActive("/shopping-list") ? "active" : ""}>Shopping List</Link>
+      {user ? (
+        <>
+          <Link to="/favorites" className={isActive("/favorites") ? "active" : ""}>Favorites</Link>
+          <Link to="/recents" className={isActive("/recents") ? "active" : ""}>Recents</Link>
+          <Link to="/shopping-list" className={isActive("/shopping-list") ? "active" : ""}>Shopping List</Link>
 
-            <div className="navbar-menu" ref={menuRef}>
-              <button
-                type="button"
-                className="navbar-menu-trigger"
-                onClick={() => setMenuOpen((prev) => !prev)}
-                aria-haspopup="true"
-                aria-expanded={menuOpen}
-              >
-                Account ▾
-              </button>
+          <div className="navbar-menu" ref={menuRef}>
+            <button
+              type="button"
+              className="navbar-menu-trigger"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              aria-haspopup="true"
+              aria-expanded={menuOpen}
+            >
+              Account ▾
+            </button>
 
-              {menuOpen && (
-                <div className="navbar-menu-dropdown" role="menu">
-                  <Link
-                    to="/account"
-                    role="menuitem"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Account
-                  </Link>
-                  <button
-                    type="button"
-                    role="menuitem"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          </>
-        ) : (
-          <Link to="/login" className="login-btn">Login</Link>
-        )}
-      </div>
-    </nav>
-  );
+            {menuOpen && (
+              <div className="navbar-menu-dropdown" role="menu">
+                <Link
+                  to="/account"
+                  role="menuitem"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Account
+                </Link>
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        </>
+      ) : (
+        <Link to="/login" className="login-btn">Login</Link>
+      )}
+    </div>
+  </nav>
+);
 }
 
 export default NavBar;

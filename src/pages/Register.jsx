@@ -36,7 +36,10 @@ export default function Register(){
 
 return (
     <div className="auth-container">
-    <div className="card">
+    <Link to="/" className="auth-logo-link">
+        <img src="/logo.png" alt="We Have Food at Home" className="auth-logo" />
+    </Link>
+        <div className="card">
         <div className="card-header">
             <h2>We Have Food At Home</h2>
             <p>Create your pantry account.</p>

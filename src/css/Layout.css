@@ -2,23 +2,26 @@
   display: flex;
   padding: 16px;
   gap: 16px;
-  height: calc(100vh - 5rem);
+  height: calc(100vh - 5.5rem);
+  overflow: hidden;
 }
 
 .pantry-pane {
   flex: 1;
   height: 100%;
   border-radius: 16px;
-  border: 1px solid #ddd;
+  border: 1.5px solid #d4ddb8;
   padding: 1rem;
   overflow-y: auto;
+  background: #EAF3DE;
 }
 
 .content-pane {
   flex: 3;
   height: 100%;
   border-radius: 16px;
-  border: 1px solid #ddd;
+  border: 1.5px solid #d4ddb8;
   padding: 1rem;
   overflow-y: auto;
+  background: #f6fdf0;
 }

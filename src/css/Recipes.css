@@ -102,19 +102,3 @@
 .apply-filters-btn:hover {
   background: #1b4332;
 }
-
-.checkbox-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-}
-
-.checkbox-grid label {
-  font-size: 0.85rem;
-  text-transform: capitalize;
-  cursor: pointer;
-}
-
-.checkbox-grid input {
-  margin-right: 0.25rem;
-}

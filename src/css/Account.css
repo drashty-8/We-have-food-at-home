@@ -1,0 +1,87 @@
+.account-page {
+  max-width: 800px;
+}
+
+.account-msg {
+  padding: 2rem;
+  color: #666;
+}
+
+.account-header {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.account-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.account-section:last-child {
+  border-bottom: none;
+}
+
+.account-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.account-email {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.account-section-hint {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.preferences-group {
+  margin-bottom: 1.5rem;
+}
+
+.preferences-group-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.save-preferences-btn {
+  background: #84994F;
+  color: #fff;
+  border: 1px solid #84994F;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.15s;
+}
+
+.save-preferences-btn:hover:not(:disabled) {
+  background: #6b7c3f;
+}
+
+.save-preferences-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.logout-btn-page {
+  background: none;
+  color: #b45253;
+  border: 1px solid #b45253;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.logout-btn-page:hover {
+  background: #b45253;
+  color: #fff;
+}

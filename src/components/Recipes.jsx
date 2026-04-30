@@ -1,7 +1,7 @@
 import RecipeCard from "./RecipeCard";
 import "../css/Recipes.css";
 import { useState } from "react";
-import { searchRecipesByIngredients } from "../utils/api";
+import { searchRecipes } from "../utils/api";
 
 function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecipes, hasSearched, setHasSearched }) {
   // const [recipes, setRecipes] = useState([]);
@@ -9,6 +9,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   // const [hasSearched, setHasSearched] = useState(false); // differentiates whether a blank screen is no recipes, or not yet searched
+  const [query, setQuery] = useState("");
 
   const cuisines = [
     "african", "asian", "american", "british", "cajun", "caribbean", "chinese",
@@ -39,11 +40,29 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
       const ingredientNames = chips.map((chip) => {
         return chip.name
       });
-      const results = await searchRecipesByIngredients(ingredientNames, filters, 40);
+      const results = await searchRecipes({ ingredientNames, filters, number: 40 });
       setRecipes(results);
       setHasSearched(true);
     } catch (err) {
       console.error("Recipe search error:", err);
+      setError(err.message || "Failed to fetch recipes. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleQuerySearch = async () => {
+    if (!query.trim()) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const results = await searchRecipes({ query, filters, number: 40 });
+      setRecipes(results);
+      setHasSearched(true);
+    } catch (err) {
+      console.error("Recipe query search error:", err);
       setError(err.message || "Failed to fetch recipes. Please try again.");
     } finally {
       setLoading(false);
@@ -59,13 +78,32 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
     });
   };
 
-  const handleApplyFilters = () => {
-    setShowFilters(false);
-    handleSearch();
-  };
-
   return (
     <div className="recipes">
+      <div className="recipe-search">
+        <input
+          type="text"
+          className="recipe-search-input"
+          placeholder="Search for a specific recipe... (ignores pantry)"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleQuerySearch();
+            }
+          }}
+          disabled={loading}
+        />
+        <button
+          type="button"
+          className="search-button"
+          onClick={handleQuerySearch}
+          disabled={loading || !query.trim()}
+        >
+          {loading ? "Searching..." : "Search"}
+        </button>
+      </div>
+
       <div className="recipe-filters">
         <button
           type="button"
@@ -82,7 +120,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
           onClick={handleSearch}
           disabled={loading || !chips.length}  // prevent clicking the search button
         >
-          {loading ? "Searching..." : "Search Recipes"}
+          {loading ? "Searching..." : "Recommend Recipes"}
         </button>
       </div>
 
@@ -186,7 +224,7 @@ function Recipes({ chips, filters, setFilters, onSelectRecipe, recipes, setRecip
             <button
               type="button"
               className="apply-filters-btn"
-              onClick={handleApplyFilters}
+              onClick={() => setShowFilters(false)}
             >
               Apply Filters
             </button>

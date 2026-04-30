@@ -44,18 +44,27 @@ export async function fetchIngredientSuggestions(query, number = 5) {
  * Search recipes by a list of ingredient names.
  * Returns an array of recipe summary objects.
  */
-export async function searchRecipesByIngredients(ingredientNames, filters, number = 6) {
-  // Return empty if pantry is empty.
-  if (!ingredientNames.length) return [];
 
-  const formatted = ingredientNames.join(",");
+
+export async function searchRecipes({ ingredientNames = [], query = "", filters = {}, number = 12}) {
+  query = query.trim();
+
+  // Return if no ingredients and no query.
+  if (!ingredientNames && !query) return [];
 
   const params = {
-    includeIngredients: formatted,
-    sort: "max-used-ingredients",
     number,
     fillIngredients: true,
-  };
+  }
+
+  if (ingredientNames.length) {
+    params.includeIngredients = ingredientNames.join(",");
+    params.sort = "max-used-ingredients";
+  }
+
+  if (query) {
+    params.query = query;
+  }
 
   // Handle filters.
   if (filters.cuisine) params.cuisine = filters.cuisine.join(",");

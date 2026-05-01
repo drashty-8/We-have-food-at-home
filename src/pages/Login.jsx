@@ -46,59 +46,60 @@ export default function Login() {
         }
     };
 
-    return (
-        <div className="auth-container">
-            <Link to="/" className="auth-logo-link">
-                <img src="/logo.png" alt="We Have Food at Home" className="auth-logo" />
-            </Link>
-            <div className="card">
-                <div className="card-header">
-                    <h2>We Have Food At Home</h2>
-                    <p>Welcome back! Log in to your pantry.</p>
-                </div>
-                <div className="card-body">
-                    {error && <p style={{ color: "red", fontWeight: "bold" }}>{error}</p>}
+return (
+    <div className="auth-container">
+        <Link to="/" className="auth-logo-link">
+        <img src="/logo.png" alt="We Have Food at Home" className="auth-logo" />
+        </Link>
+    
+    <div className="card">
+        <div className="card-header">
+            <h2>We Have Food At Home</h2>
+            <p>Welcome back! Log in to your pantry.</p>
+        </div>  
 
-                    <form onSubmit={handleLogin}>
-                       
-                        <label htmlFor="email">Email</label>
-                        <input
-                            id="email"
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            placeholder="Enter your email"
-                        />
+    <div className="card-body">
+        {error && <p style={{ color: "red", fontWeight: "bold" }}>{error}</p>}
+        <form onSubmit={handleLogin}>
+            
+            <label htmlFor="email">Email:</label>
+            <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+        />
 
-                        <label htmlFor="password">Password</label>
-                        <input
-                            id="password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            placeholder="Enter your password"
-                        />
+            <label htmlFor="password">Password:</label>
+            <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+        />
 
-                        <button type="submit" disabled={loading}>
-                            {loading ? "Logging in..." : "Log In"}
-                        </button>
-                    </form>
+            <button type="submit" disabled={loading}>
+                {loading ? "Logging in..." : "Log In"}
+            </button>
+        </form>
 
-                    <div className="social-login">
-                        <button 
-                            className="google-btn" 
-                            onClick={handleGoogleLogin} 
-                            disabled={loading}
-                        >
-                            Log in with Google
-                        </button>
-                    </div>
-
-                    <p style={{ marginTop: "1rem" }}>
-                        Don't have an account? <Link to="/register">Register</Link>
-                    </p>
+    <div className="social-login">
+            <button 
+                type="button"
+                className="google-btn" 
+                onClick={handleGoogleLogin} 
+                disabled={loading}
+        >
+            {loading ? "Please wait..." : "Log in with Google"}
+            </button>
+        </div>
+        <p style={{ marginTop: "1rem" }}>
+            Don't have an account? <Link to="/register">Register</Link>
+        </p>
                 </div>
             </div>
         </div>

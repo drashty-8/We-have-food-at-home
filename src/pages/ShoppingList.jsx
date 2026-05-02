@@ -1,28 +1,33 @@
 import { useState, useEffect } from "react";
 import { db, auth } from "../config/firebase";
 import { collection, query, onSnapshot, doc, deleteDoc, updateDoc, orderBy } from "firebase/firestore";
-import "../css/ShoppingList.css"; 
+import "../css/ShoppingList.css";
 
 function ShoppingList() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!auth.currentUser) return;
+    const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const listRef = collection(db, "users", user.uid, "shoppingList");
+        const q = query(listRef, orderBy("addedAt", "desc"));
 
-    const listRef = collection(db, "users", auth.currentUser.uid, "shoppingList");
-    const q = query(listRef, orderBy("addedAt", "desc"));
+        const unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
+          const listData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          setItems(listData);
+          setLoading(false);
+        });
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const listData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setItems(listData);
-      setLoading(false);
+        return () => unsubscribeSnapshot();
+      } else {
+        setLoading(false);
+      }
     });
-
-    return () => unsubscribe();
+    return () => unsubscribeAuth();
   }, []);
 
   // Function to check/uncheck items
@@ -43,7 +48,7 @@ function ShoppingList() {
   return (
     <div className="shopping-list-container">
       <h2>My Shopping List</h2>
-      
+
       {items.length === 0 ? (
         <p className="empty-msg">Your list is empty. Start adding ingredients!</p>
       ) : (
@@ -51,10 +56,10 @@ function ShoppingList() {
           {items.map((item) => (
             <div key={item.id} className={`list-item ${item.completed ? "checked" : ""}`}>
               <div className="item-info">
-                <input 
-                  type="checkbox" 
-                  checked={item.completed} 
-                  onChange={() => toggleComplete(item.id, item.completed)} 
+                <input
+                  type="checkbox"
+                  checked={item.completed}
+                  onChange={() => toggleComplete(item.id, item.completed)}
                 />
                 <div>
                   <p className="item-name">{item.amount} {item.unit} {item.name}</p>

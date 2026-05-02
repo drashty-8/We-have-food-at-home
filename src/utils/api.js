@@ -50,7 +50,7 @@ export async function searchRecipes({ ingredientNames = [], query = "", filters 
   query = query.trim();
 
   // Return if no ingredients and no query.
-  if (!ingredientNames && !query) return [];
+  if (!ingredientNames.length && !query) return [];
 
   const params = {
     number,

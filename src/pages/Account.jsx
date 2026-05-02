@@ -18,7 +18,7 @@ const intolerances = [
 ];
 
 function Account() {
-  const naviage = useNavigate();
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [preferences, setPreferences] = useState({ diet: [], intolerances: [] });
   const [loading, setLoading] = useState(true);
@@ -68,7 +68,7 @@ function Account() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      Navigate("/login");
+      navigate("/login");
     } catch (error) {
       console.error("Error logging out: ", error);
     }

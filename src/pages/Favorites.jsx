@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { db, auth } from "../config/firebase";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import RecipeCard from "../components/RecipeCard";
-import RecipeDetails from "../components/RecipeDetails"; 
+import RecipeDetails from "../components/RecipeDetails";
 import "../css/favorites.css";
 
 function Favorites() {
@@ -39,28 +39,28 @@ function Favorites() {
 
   if (selectedRecipe) {
     return (
-      <RecipeDetails 
-        recipe={selectedRecipe} 
-        onBack={() => setSelectedRecipe(null)} 
+      <RecipeDetails
+        recipe={selectedRecipe}
+        onBack={() => setSelectedRecipe(null)}
       />
     );
   }
 
   return (
-    <div className="favorites-container" style={{ padding: "20px" }}>
-      <h1 style={{ color: "#588157", textAlign: "center" }}>Your Saved Recipes</h1>
-      
+    <div className="favorites-container">
+      <h1 className="page-header">Your Saved Recipes</h1>
+
       {favoriteRecipes.length === 0 ? (
-        <p style={{ textAlign: "center", marginTop: "40px" }}>
+        <p className="empty-msg">
           No favorites yet! Go to the home page and click some ❤️ icons.
         </p>
       ) : (
         <div className="recipe-grid">
           {favoriteRecipes.map((recipe) => (
-            <RecipeCard 
-              key={recipe.id} 
-              recipe={recipe} 
-              onClick={() => setSelectedRecipe(recipe)} 
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
+              onClick={() => setSelectedRecipe(recipe)}
             />
           ))}
         </div>

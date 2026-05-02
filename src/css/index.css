@@ -31,3 +31,12 @@ a {
 .checkbox-grid input {
   margin-right: 0.25rem;
 }
+
+.page-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c2c2a;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #84994F;
+}

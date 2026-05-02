@@ -93,10 +93,7 @@ function Pantry({ chips, setChips }) {
 
   return (
     <div className="pantry">
-      <div className="pantry-header">
-        <h2 className="pantry-title">My Pantry</h2>
-
-    </div>
+      <h2 className="page-header">My Pantry</h2>
 
       {!isLoggedIn && (
         <p className="pantry-hint">

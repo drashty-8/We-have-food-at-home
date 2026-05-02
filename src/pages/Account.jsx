@@ -84,7 +84,7 @@ function Account() {
 
   return (
     <div className="account-page">
-      <h2 className="account-header">Account</h2>
+      <h2 className="page-header">Account</h2>
 
       <section className="account-section">
         <h3>Email</h3>

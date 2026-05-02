@@ -47,7 +47,7 @@ function ShoppingList() {
 
   return (
     <div className="shopping-list-container">
-      <h2>My Shopping List</h2>
+      <h2 className="page-header">My Shopping List</h2>
 
       {items.length === 0 ? (
         <p className="empty-msg">Your list is empty. Start adding ingredients!</p>

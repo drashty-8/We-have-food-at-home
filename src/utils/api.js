@@ -77,7 +77,6 @@ export async function searchRecipes({ ingredientNames = [], query = "", filters 
   // Technically not correct, but works.
   // Should probably be return data.results ?? [];
   if (data.results) {
-    console.log(data.results);
     return data.results;
   } else {
     return [];

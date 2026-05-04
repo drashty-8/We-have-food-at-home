@@ -219,3 +219,30 @@
 .step-text {
   font-size: 0.95rem;
 }
+
+@media (max-width: 960px) {
+  .recipe-details-img {
+    max-height: 250px;
+  }
+
+  .recipe-details-title {
+    font-size: 1.4rem;
+  }
+
+  .recipe-meta {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .add-list-button {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+
+  .favorite-btn-bottom {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+

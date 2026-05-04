@@ -25,3 +25,26 @@
   overflow-y: auto;
   background: #f6fdf0;
 }
+
+@media (max-width: 960px) {
+  .app-layout {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 5.5rem);
+    overflow: visible;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .pantry-pane {
+    flex: none;
+    height: auto;
+    max-height: 40vh;
+  }
+
+  .content-pane {
+    flex: none;
+    height: auto;
+    min-height: 50vh;
+  }
+}

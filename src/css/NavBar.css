@@ -9,6 +9,7 @@
   background-color: #3b6d11;
   gap: 1rem;
   overflow: visible;
+  position: relative;
 }
 
 .navbar-brand {
@@ -25,7 +26,7 @@
 .navbar-brand a {
   font-weight: bold;
   white-space: nowrap;
-  color: #ffffff; 
+  color: #ffffff;
   font-size: 1.3em;
   text-decoration: none;
 }
@@ -66,6 +67,22 @@
 .brand-link span {
   font-weight: bold;
   font-size: 1.2em;
+}
+
+/* --- HAMBURGER BUTTON (hidden on desktop) --- */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #fdf6e3;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.hamburger-btn:hover {
+  color: #f4a7bb;
 }
 
 /* --- DROPDOWN MENU --- */
@@ -119,31 +136,84 @@
   color: #3b6d11;
 }
 
-/* --- RESPONSIVE SECTION --- */
-
-@media (max-width: 900px) {
+/* --- RESPONSIVE: MOBILE --- */
+@media (max-width: 960px) {
   .navbar {
-    padding: 1rem 1.5rem;
-    font-size: 0.9em;
-  }
-
-  .navbar-links {
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     height: auto;
-    gap: 0.75rem;
+    min-height: 4rem;
+  }
+
+  .navbar-logo {
+    width: 50px;
+    height: 50px;
+    padding-top: 4px;
+  }
+
+  .brand-link span {
+    font-size: 1em;
+  }
+
+  .hamburger-btn {
+    display: block;
   }
 
   .navbar-links {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-size: 0.9rem;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background-color: #3b6d11;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-left: 0;
+    z-index: 99;
+  }
+
+  .navbar-links.navbar-links-open {
+    display: flex;
+  }
+
+  .navbar-links a,
+  .navbar-menu-trigger {
+    padding: 1rem 1.5rem;
+    font-size: 1.05em;
+    width: 100%;
+    text-align: left;
+  }
+
+  .navbar-links a:hover,
+  .navbar-menu-trigger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Dropdown adjusts to mobile - sits below the trigger inline */
+  .navbar-menu {
+    width: 100%;
+  }
+
+  .navbar-menu-dropdown {
+    position: static;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .navbar-menu-dropdown a,
+  .navbar-menu-dropdown button {
+    color: #fdf6e3;
+    padding: 0.75rem 2.5rem;
+  }
+
+  .navbar-menu-dropdown a:hover,
+  .navbar-menu-dropdown button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
   }
 }

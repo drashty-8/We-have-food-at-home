@@ -45,6 +45,13 @@
   gap: 16px;
 }
 
+@media (max-width: 960px) {
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+}
+
 .recipes-error {
   color: #d32f2f;
   font-size: 13px;
@@ -116,6 +123,16 @@
   gap: 8px;
   margin-bottom: 12px;
   max-width: 700px;
+}
+
+@media (max-width: 480px) {
+  .recipe-search {
+    flex-direction: column;
+  }
+
+  .recipe-search .search-button {
+    width: 100%;
+  }
 }
 
 .recipe-search-input {

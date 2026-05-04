@@ -28,7 +28,19 @@ export default function Register(){
             await createUserWithEmailAndPassword(auth, email, password);
             navigate("/");
         } catch (err) {
-            setError("Could not create account. Please check your email and password.");
+            switch(err.code) {
+                case "auth/email-already-exists":
+                    setError("An account with this email already exists.");
+                    break;
+                case "auth/invalid-email":
+                    setError("Please enter a valid email address.");
+                    break;
+                case "auth/password-does-not-meet-requirements":
+                    setError("Password must include uppercase, lowercase, number and special character.");
+                    break;
+                default:
+                    setError("Could not create account. Please try again.");
+            }
         } finally {
             setLoading(false);
         }

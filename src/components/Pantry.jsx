@@ -107,6 +107,11 @@ function Pantry({ chips, setChips }) {
         className="ingredient-input"
         value={ingredientQuery}
         onChange={(event) => setIngredientQuery(event.target.value)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" && suggestions.length > 0) {
+            addChipFromSuggestion(suggestions[0].name);
+          }
+        }}
       />
 
       {error && <p className="pantry-error">{error}</p>}

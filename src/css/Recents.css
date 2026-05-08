@@ -1,0 +1,24 @@
+.recents-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.recent-card {
+  width: 250px;
+  cursor: pointer;
+}
+
+.recent-card img {
+  width: 250px;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.recent-card p {
+  margin-top: 8px;
+  font-size: 14px;
+}

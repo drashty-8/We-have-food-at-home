@@ -4,6 +4,21 @@ import { auth } from "../config/firebase";
 import { loadRecentRecipes } from "../utils/recentRecipe";
 import RecipeDetails from "../components/RecipeDetails";
 
+/*
+ * Recents Page
+ *
+ * Displays all recipes the user has recently viewed.
+ * Recipes are loaded from Firebase under:
+ * users/{uid}/recentRecipes
+ *
+ * Features:
+ * - Loads recent recipes when the page opens
+ * - Shows a message if there are no recent recipes
+ * - Displays recipe cards in a horizontal scrolling row
+ * - Opens RecipeDetails when a recipe is clicked
+ * - Hides "(missing)" ingredient tags when viewing from this page
+ */
+
 function Recents() {
   const [recentRecipes, setRecentRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -11,9 +26,11 @@ function Recents() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        // Load recently viewed recipes from Firestore
         const recent = await loadRecentRecipes(user.uid);
         setRecentRecipes(recent);
       } else {
+        // Clear data if the user is not logged in
         setRecentRecipes([]);
       }
     });
@@ -21,6 +38,11 @@ function Recents() {
     return () => unsubscribe();
   }, []);
 
+   /*
+   * If a recipe is selected, show the detailed recipe page.
+   * hideMissing={true} prevents "(missing)" labels
+   * from appearing on the Recents page.
+   */
   if (selectedRecipe) {
     return (
       <RecipeDetails
@@ -31,6 +53,12 @@ function Recents() {
     );
   }
 
+  /*
+   * Main page display.
+   * Shows a title and either:
+   * - A message if no recent recipes exist
+   * - A horizontal row of recipe cards
+   */
   return (
     <div className="recents-page">
       <h2>Recently Viewed</h2>

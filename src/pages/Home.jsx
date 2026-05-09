@@ -60,7 +60,7 @@ useEffect(() => {
     const updated = [
       selectedRecipe,
       ...prev.filter((r) => r.id !== selectedRecipe.id),
-    ].slice(0, 10);
+    ].slice(0, 7);
 
     saveRecentRecipes(user.uid, updated);
 

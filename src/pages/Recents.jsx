@@ -61,7 +61,7 @@ function Recents() {
    */
   return (
     <div className="recents-page">
-      <h2>Recently Viewed</h2>
+      <h1 className="page-header">Recently Viewed</h1>
 
       {recentRecipes.length === 0 ? (
         <p>Recently viewed recipes will appear here.</p>

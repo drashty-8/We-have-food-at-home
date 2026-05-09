@@ -143,17 +143,6 @@ Team 8 — COMP 380: Introduction to Software Engineering
 
 ---
 
-## Documentation
-
-Project documentation is available in the [`/docs`](./docs) folder.
-
-- Software Requirements Specification (SRS)
-- Software Design Document (SDD)
-- Software Verification Plan (SVP)
-- Project Management Plan (PMP)
-
----
-
 ## Acknowledgments
 
 - [Spoonacular API](https://spoonacular.com/food-api) for recipe data

@@ -59,7 +59,8 @@ useEffect(() => {
   setRecentRecipes((prev) => {
     const updated = [
       selectedRecipe,
-      ...prev.filter((r) => r.id !== selectedRecipe.id),
+      ...prev.filter(
+        (r) => r.id !== selectedRecipe.id && r.title !== selectedRecipe.title),
     ].slice(0, 7);
 
     saveRecentRecipes(user.uid, updated);

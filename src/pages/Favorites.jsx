@@ -49,7 +49,8 @@ function Favorites() {
     setRecentRecipes((prev) => {
       const updated = [
         recipe,
-        ...prev.filter((r) => r.id !== recipe.id),
+        ...prev.filter(
+          (r) => r.id !== recipe.id && r.title !== recipe.title),
       ].slice(0, 7);
 
       saveRecentRecipes(user.uid, updated);

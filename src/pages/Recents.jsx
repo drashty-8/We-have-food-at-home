@@ -26,6 +26,7 @@ function Recents() {
       <RecipeDetails
         recipe={selectedRecipe}
         onBack={() => setSelectedRecipe(null)}
+        hideMissing={true}
       />
     );
   }

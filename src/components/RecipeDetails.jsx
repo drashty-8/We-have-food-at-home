@@ -5,7 +5,7 @@ import { db, auth } from "../config/firebase";
 import { collection, addDoc, doc, setDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import DOMPurify from "dompurify";
 
-function RecipeDetails({ recipe, onBack }) {
+function RecipeDetails({ recipe, onBack, hideMissing = false }) {
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [recipeSteps, setRecipeSteps] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -177,7 +177,10 @@ function RecipeDetails({ recipe, onBack }) {
         <div className="ingredients-list">
           {recipeDetails.extendedIngredients.map((ingredient) => (
             <p className="ingredient-item" key={ingredient.id}>
-              {ingredient.amount} {ingredient.unit} — {ingredient.name} {missingIngredientIDs.has(ingredient.id) ? <span className="missing-tag">(missing)</span> : ""}
+              {ingredient.amount} {ingredient.unit} — {ingredient.name}{" "}
+              {!hideMissing && missingIngredientIDs.has(ingredient.id) ? (
+                  <span className="missing-tag">(missing)</span>
+              ) : ""}
             </p>
           ))}
         </div>
